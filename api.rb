@@ -41,9 +41,8 @@ end
 
 def photos_count(connection)
   nuevo_has={}
-  cantidad = connection.map{|x| nuevo_has[x['camera']['name']] = 1 + nuevo_has[x['camera']['name']].to_i }
-
-  print cantidad
+  connection.map{|x| nuevo_has[x['camera']['name']] = 1 + nuevo_has[x['camera']['name']].to_i }
+  print nuevo_has
 end
 
 
