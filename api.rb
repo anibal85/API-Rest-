@@ -15,11 +15,14 @@ def request(address,key)
   JSON response.read_body
 
 end
+
 address ="https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?sol=1000"
 key="&api_key=M1REUtc9ZqdjuJAOZVK1tfwpJeYzHkd8URtVUN0H"
 
+# guarda en una variable el metodo request
 connection = request(address,key)
-connection = connection["photos"][0..9]
+
+connection = connection["photos"][0..20]
 
 photos = connection.map{|x| x['img_src']}
 
@@ -29,15 +32,16 @@ html= " <html>
   </head>
   <body>
   <ul>"
+  # ciclo para recorre las imagen en el hashes
   photos.each do |photo|
   html += "<img src=\"#{photo}\">\n"
   end
   html+="</ul>
   </body>
   </html>"
-
   File.write('output.html', html)
 end
+
 
 def photos_count(connection)
   nuevo_has={}
