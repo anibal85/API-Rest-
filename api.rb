@@ -45,7 +45,6 @@ def photos_count(connection)
   print nuevo_has
 end
 
-
 buid_web_page(photos)
 
 photos_count(connection)
