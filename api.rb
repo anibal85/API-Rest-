@@ -19,7 +19,7 @@ address ="https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?sol=10
 key="&api_key=M1REUtc9ZqdjuJAOZVK1tfwpJeYzHkd8URtVUN0H"
 
 connection = request(address,key)
-connection = connection["photos"]
+connection = connection["photos"][0..9]
 
 photos = connection.map{|x| x['img_src']}
 
@@ -39,4 +39,14 @@ html= " <html>
   File.write('output.html', html)
 end
 
+def photos_count(connection)
+  nuevo_has={}
+  cantidad = connection.map{|x| nuevo_has[x['camera']['name']] = 1 + nuevo_has[x['camera']['name']].to_i }
+
+  print cantidad
+end
+
+
 buid_web_page(photos)
+
+photos_count(connection)
